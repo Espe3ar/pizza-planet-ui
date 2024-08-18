@@ -9,6 +9,9 @@
 fetch('http://127.0.0.1:5000/order/')
     .then(response => response.json())
     .then(orders => {
+        orders.forEach(order => {
+            order.total_price = order.total_price.toFixed(2);
+        });
         let rows = orders.map(element => createOrderTemplate(element));
         let table = $("#orders tbody");
         table.append(rows);
